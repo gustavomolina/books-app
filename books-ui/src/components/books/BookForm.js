@@ -24,8 +24,10 @@ class BookForm extends React.Component {
 
   constructor(props) {
     super(props);
-    props.initialValues.inclusionDate = props.initialValues.inclusionDate ? new Date(props.initialValues.inclusionDate) : null
-    props.initialValues.dateOfTheConclusion = props.initialValues.dateOfTheConclusion ? new Date(props.initialValues.dateOfTheConclusion) : null
+    if(props.initialValues?.inclusionDate)
+      props.initialValues.inclusionDate = props.initialValues.inclusionDate ? new Date(props.initialValues.inclusionDate) : null
+    if(props.initialValues?.dateOfTheConclusion)
+      props.initialValues.dateOfTheConclusion = props.initialValues.dateOfTheConclusion ? new Date(props.initialValues.dateOfTheConclusion) : null
 
     this.state = {
       selectedReadedcount: props.initialValues?.status?.value == 'LIDO' ? true : false
