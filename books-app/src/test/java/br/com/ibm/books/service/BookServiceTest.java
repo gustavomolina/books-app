@@ -12,13 +12,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -37,7 +35,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void when2BooksInDatabase_thenGetListWithAllOfThem() {
+    public void when2BooksInDatabaseThenGetListWithAllOfThem() {
         //given
         mockBooksInDatabase(2);
 
@@ -49,21 +47,38 @@ public class BookServiceTest {
     }
 
     @Test
-    public void when1BookInDatabase_thenGetItById() {
+    public void when1BookInDatabaseThenGetItById() {
         //given
         mockBookInDatabase(1L);
 
         //when
-       var book = booksService.getBookById(1L);
+        var book = booksService.getBookById(1L);
 
         //then
         assertTrue(book.isPresent());
     }
 
     @Test
-    public void when1BookInDatabase_thenNotFoundWhenDeleteItById() {
+    public void whenNoBookInDatabaseThenNotFoundGetItById() {
         //given
-        mockNotFoundBooksInDatabase();
+        mockNotFoundBooksWhenGetByIdInDatabase(1L);
+        Exception exception = null;
+
+        //when
+        try {
+            booksService.getBookById(1L);
+        } catch (DefaultException e) {
+            exception = e;
+        }
+
+        //then
+        assertNotNull(exception);
+    }
+
+    @Test
+    public void when1BookInDatabaseThenNotFoundWhenDeleteItById() {
+        //given
+        mockNotFoundBooksWhenDeleteInDatabase();
         Exception exception = null;
 
         //when
@@ -78,21 +93,41 @@ public class BookServiceTest {
     }
 
     @Test
-    public void when1BookInDatabase_thenUpdate() {
+    public void when1BookInDatabaseThenUpdateById() {
         //given
         mockSaveBookIntoDatabase(1L);
+        mockBookInDatabase(1L);
 
         //when
-        var oldBook = mockBook(1L);
-        var newBookVO = mockBookVO(1L);
-        Book responseEntity = booksService.updateBook(oldBook, newBookVO);
+        Book oldBook = mockBook(1L);
+        BookVO newBookVO = mockBookVO(1L);
+        Book responseEntity = booksService.updateBook(1L, newBookVO);
 
         //then
         assertEquals(responseEntity.getId(), oldBook.getId());
     }
 
     @Test
-    public void whenNoBookInDatabase_thenCreate() {
+    public void whenNoBookInDatabaseThenNotFoundUpdateById() {
+        //given
+        mockSaveBookIntoDatabase(1L);
+        mockNotFoundBooksWhenGetByIdInDatabase(1L);
+        Exception exception = null;
+        BookVO newBookVO = mockBookVO(1L);
+
+        //when
+        try {
+            booksService.updateBook(1L, newBookVO);
+        } catch (DefaultException e) {
+            exception = e;
+        }
+
+        //then
+        assertNotNull(exception);
+    }
+
+    @Test
+    public void whenNoBookInDatabaseThenCreate() {
         //given
         mockSaveBookIntoDatabase(1L);
 
@@ -103,14 +138,17 @@ public class BookServiceTest {
         assertNotNull(book);
     }
 
-
     private void mockBooksInDatabase(int bookCount) {
         when(bookRepository.findAll())
                 .thenReturn(createBooksList(bookCount));
     }
 
-    private void mockNotFoundBooksInDatabase() {
+    private void mockNotFoundBooksWhenDeleteInDatabase() {
         doThrow(DefaultException.class).when(bookRepository).delete(any(Book.class));
+    }
+
+    private void mockNotFoundBooksWhenGetByIdInDatabase(Long bookId) {
+        doThrow(DefaultException.class).when(bookRepository).findById(bookId);
     }
 
     private void mockBookInDatabase(Long bookId) {

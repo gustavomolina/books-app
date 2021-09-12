@@ -2,10 +2,12 @@ package br.com.ibm.books.service;
 
 import br.com.ibm.books.entities.Book;
 import br.com.ibm.books.repository.BooksRepository;
+import br.com.ibm.books.util.DefaultException;
 import br.com.ibm.books.vo.BookStatusVO;
 import br.com.ibm.books.vo.BookVO;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +44,9 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     @Transactional
-    public Book updateBook(Book oldBook, BookVO newBookVO) {
+    public Book updateBook(Long bookId, BookVO newBookVO) {
+        var oldBook = getBookById(bookId).orElseThrow(new DefaultException(HttpStatus.NOT_FOUND, "Book not found"));;
+
         return booksRepository.save(updateBookFromVO(oldBook, newBookVO));
     }
 

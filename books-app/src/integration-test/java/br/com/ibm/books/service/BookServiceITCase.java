@@ -35,7 +35,7 @@ public class BookServiceITCase {
 
 
     @Test
-    public void whenCreated_thenIsSavedInDb() {
+    public void whenCreatedThenIsSavedInDb() {
         //given
         BookVO bookVO = BookVO.builder()
             .title("Mocked Title")

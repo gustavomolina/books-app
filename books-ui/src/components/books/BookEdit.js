@@ -21,7 +21,7 @@ class BookEdit extends React.Component {
       <div>
         <h3>Editar um livro</h3>
         <BookForm
-          initialValues={_.pick(this.props.book, "title", "author", "status")}
+          initialValues={_.pick(this.props.book, "title", "author", "status", "inclusionDate", "dateOfTheConclusion", "evaluationGrade")}
           onSubmit={this.onSubmit}
         />
       </div>

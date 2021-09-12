@@ -64,14 +64,9 @@ public class BooksResources {
     @ApiOperation(value="Update a books with specific id", response = Book.class)
     public ResponseEntity<?> updateBook(@PathVariable Long id, @RequestBody BookVO bookVO){
         try {
-            Optional<Book> optBook = booksService.getBookById(id);
-            if (optBook.isPresent()) {
-                return new ResponseEntity<>(
-                        booksService.updateBook(optBook.get(), bookVO),
-                        HttpStatus.OK);
-            } else {
-                return noBookFoundResponse(id);
-            }
+            return new ResponseEntity<>(
+                    booksService.updateBook(id, bookVO),
+                    HttpStatus.OK);
         } catch (Exception e) {
             return errorResponse();
         }

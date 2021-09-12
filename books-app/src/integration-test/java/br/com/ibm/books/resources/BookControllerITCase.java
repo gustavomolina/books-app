@@ -11,20 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
-
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -43,9 +39,8 @@ public class BookControllerITCase extends CommonITCase {
         baseURL = "http://localhost:" + port;
     }
 
-
     @Test
-    public void whenGetAllBooks_thenReceiveSingleBook(){
+    public void whenGetAllBooksThenReceiveSingleBook(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -55,12 +50,11 @@ public class BookControllerITCase extends CommonITCase {
         Book book = saveSingleBook();
 
         //when
-
         ResponseEntity<List<BookVO>> response = restTemplate.exchange(
-                baseURL + "/api/books/",
-                HttpMethod.GET,
-                new HttpEntity<>(new HttpHeaders()),
-                new ParameterizedTypeReference<List<BookVO>>() {});
+        baseURL + "/api/books/",
+            HttpMethod.GET,
+            new HttpEntity<>(new HttpHeaders()),
+            new ParameterizedTypeReference<List<BookVO>>() {});
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -68,7 +62,7 @@ public class BookControllerITCase extends CommonITCase {
     }
 
     @Test
-    public void whenGetSingleBookById_thenReceiveSingleBook(){
+    public void whenGetSingleBookByIdThenReceiveSingleBook(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -79,10 +73,10 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
         ResponseEntity<Book> response = restTemplate.exchange(
-                baseURL + "/api/books/" + book.getId(),
-                HttpMethod.GET,
-                new HttpEntity<>(new HttpHeaders()),
-                Book.class);
+        baseURL + "/api/books/" + book.getId(),
+            HttpMethod.GET,
+            new HttpEntity<>(new HttpHeaders()),
+            Book.class);
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -90,7 +84,7 @@ public class BookControllerITCase extends CommonITCase {
     }
 
     @Test
-    public void whenPostSingleBook_thenItIsStoredInDb(){
+    public void whenPostSingleBookThenItIsStoredInDb(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -101,10 +95,10 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
         ResponseEntity<Book> response = restTemplate.exchange(
-                baseURL + "/api/books/",
-                HttpMethod.POST,
-                new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
-                Book.class);
+        baseURL + "/api/books/",
+            HttpMethod.POST,
+            new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
+            Book.class);
 
         //then
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -123,7 +117,7 @@ public class BookControllerITCase extends CommonITCase {
     }
 
     @Test
-    public void whenPostSingleBookWithBookAssignment_thenItIsStoredInDb(){
+    public void whenPostSingleBookWithBookAssignmentThenItIsStoredInDb(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -134,10 +128,10 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
         ResponseEntity<Book> response = restTemplate.exchange(
-                baseURL + "/api/books/",
-                HttpMethod.POST,
-                new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
-                Book.class);
+        baseURL + "/api/books/",
+            HttpMethod.POST,
+            new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
+            Book.class);
 
         //then
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -155,10 +149,8 @@ public class BookControllerITCase extends CommonITCase {
         assertEquals(book.getEvaluationGrade(), savedBook.getEvaluationGrade());
     }
 
-
-
     @Test
-    public void whenPutSingleBook_thenItIsUpdated(){
+    public void whenPutSingleBookThenItIsUpdated(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -170,10 +162,10 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
         ResponseEntity<Book> response = restTemplate.exchange(
-                baseURL + "/api/books/" + book.getId(),
-                HttpMethod.PUT,
-                new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
-                Book.class);
+        baseURL + "/api/books/" + book.getId(),
+            HttpMethod.PUT,
+            new HttpEntity<>(convertBookToDTO(book), new HttpHeaders()),
+            Book.class);
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -181,7 +173,7 @@ public class BookControllerITCase extends CommonITCase {
     }
 
     @Test
-    public void whenDeleteSingleBookById_thenItIsDeletedFromDb(){
+    public void whenDeleteSingleBookByIdThenItIsDeletedFromDb(){
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
@@ -192,10 +184,10 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
         ResponseEntity<String> response = restTemplate.exchange(
-                baseURL + "/api/books/" + book.getId(),
-                HttpMethod.DELETE,
-                new HttpEntity<>(new HttpHeaders()),
-                String.class);
+        baseURL + "/api/books/" + book.getId(),
+            HttpMethod.DELETE,
+            new HttpEntity<>(new HttpHeaders()),
+            String.class);
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());

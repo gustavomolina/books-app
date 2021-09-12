@@ -4,7 +4,6 @@ import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 
-
 const userOptions = [
   {
     label: 'Quero Ler',
@@ -25,8 +24,11 @@ class BookForm extends React.Component {
 
   constructor(props) {
     super(props);
+    props.initialValues.inclusionDate = props.initialValues.inclusionDate ? new Date(props.initialValues.inclusionDate) : null
+    props.initialValues.dateOfTheConclusion = props.initialValues.dateOfTheConclusion ? new Date(props.initialValues.dateOfTheConclusion) : null
+
     this.state = {
-      selectedReadedcount: props.initialValues?.status == 'LIDO' ? true : false
+      selectedReadedcount: props.initialValues?.status?.value == 'LIDO' ? true : false
     };
   }
 
