@@ -42,7 +42,7 @@ $ docker-compose down
 
 #### books-database (Base de dados)
 
-A base de dados PostgreSQL possui um único schema com uma unica tabela - book
+A base de dados PostgreSQL possui um único schema com uma única tabela - book
 
 Apos rodar o projeto, a base de dados pode ser acessada com as credenciais:
 
