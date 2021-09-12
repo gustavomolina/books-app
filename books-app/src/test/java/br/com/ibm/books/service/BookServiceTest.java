@@ -176,7 +176,7 @@ public class BookServiceTest {
         book.setId(number);
         book.setTitle("Mocked Title");
         book.setAuthor("Mocked Author");
-        book.setInclusionDate(LocalDateTime.now());
+        book.setInclusionDate(LocalDate.now());
         book.setDateOfTheConclusion(null);
         book.setEvaluationGrade(10);
         book.setStatus(BookStatusType.LIDO);

@@ -62,8 +62,8 @@ public class BooksServiceImpl implements BooksService {
         book.setTitle(bookVO.getTitle());
         book.setAuthor(bookVO.getAuthor());
         book.setEvaluationGrade(bookVO.getEvaluationGrade());
-        book.setDateOfTheConclusion(bookVO.getDateOfTheConclusion());
-        book.setInclusionDate(bookVO.getInclusionDate());
+        book.setDateOfTheConclusion(bookVO.getDateOfTheConclusion() != null ? bookVO.getDateOfTheConclusion().toLocalDate() : null);
+        book.setInclusionDate(bookVO.getInclusionDate() != null ? bookVO.getInclusionDate().toLocalDate() : null);
         book.setStatus(bookVO.getStatus().getValue());
         return book;
     }
@@ -73,8 +73,8 @@ public class BooksServiceImpl implements BooksService {
         vo.setId(book.getId());
         vo.setTitle(book.getTitle());
         vo.setAuthor(book.getAuthor());
-        vo.setInclusionDate(book.getInclusionDate());
-        vo.setDateOfTheConclusion(book.getDateOfTheConclusion());
+        vo.setInclusionDate(book.getInclusionDate() != null ? book.getInclusionDate().atTime(00,00,00) : null);
+        vo.setDateOfTheConclusion(book.getDateOfTheConclusion() != null ? book.getDateOfTheConclusion().atTime(00,00,00) : null);
         vo.setEvaluationGrade(book.getEvaluationGrade());
         vo.setStatus(new BookStatusVO(book.getStatus().getDescription(), book.getStatus()));
         return vo;
@@ -98,11 +98,11 @@ public class BooksServiceImpl implements BooksService {
         }
 
         if (Optional.ofNullable((bookVO.getDateOfTheConclusion())).isPresent()) {
-            book.setDateOfTheConclusion(bookVO.getDateOfTheConclusion());
+            book.setDateOfTheConclusion(bookVO.getDateOfTheConclusion().toLocalDate());
         }
 
         if (Optional.ofNullable((bookVO.getInclusionDate())).isPresent()) {
-            book.setInclusionDate(bookVO.getInclusionDate());
+            book.setInclusionDate(bookVO.getInclusionDate().toLocalDate());
         }
 
         return book;

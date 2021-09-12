@@ -32,10 +32,10 @@ public class Book {
     private String author;
 
     @ApiModelProperty(position = 4)
-    private LocalDateTime inclusionDate;
+    private LocalDate inclusionDate;
 
     @ApiModelProperty(position = 5)
-    private LocalDateTime dateOfTheConclusion;
+    private LocalDate dateOfTheConclusion;
 
     @ApiModelProperty(position = 6)
     private Integer evaluationGrade;
