@@ -97,6 +97,14 @@ public class BooksServiceImpl implements BooksService {
             book.setStatus(bookVO.getStatus().getValue());
         }
 
+        if (Optional.ofNullable((bookVO.getDateOfTheConclusion())).isPresent()) {
+            book.setDateOfTheConclusion(bookVO.getDateOfTheConclusion());
+        }
+
+        if (Optional.ofNullable((bookVO.getInclusionDate())).isPresent()) {
+            book.setInclusionDate(bookVO.getInclusionDate());
+        }
+
         return book;
     }
 }

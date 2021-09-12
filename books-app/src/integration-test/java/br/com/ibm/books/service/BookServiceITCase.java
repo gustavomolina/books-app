@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -40,8 +41,8 @@ public class BookServiceITCase {
         BookVO bookVO = BookVO.builder()
             .title("Mocked Title")
             .author("Mocked Author")
-            .dateOfTheConclusion(LocalDate.now().minusDays(10))
-            .inclusionDate(LocalDate.now())
+            .dateOfTheConclusion(LocalDateTime.now().minusDays(10))
+            .inclusionDate(LocalDateTime.now())
             .status(new BookStatusVO(BookStatusType.LIDO.getDescription(), BookStatusType.LIDO))
             .evaluationGrade(10)
             .build();

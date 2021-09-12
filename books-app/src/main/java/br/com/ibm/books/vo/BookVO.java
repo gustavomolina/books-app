@@ -23,9 +23,9 @@ public class BookVO {
 
     private String author;
 
-    private LocalDate inclusionDate;
+    private LocalDateTime inclusionDate;
 
-    private LocalDate dateOfTheConclusion;
+    private LocalDateTime dateOfTheConclusion;
 
     private Integer evaluationGrade;
 

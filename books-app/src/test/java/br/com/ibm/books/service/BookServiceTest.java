@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -175,7 +176,7 @@ public class BookServiceTest {
         book.setId(number);
         book.setTitle("Mocked Title");
         book.setAuthor("Mocked Author");
-        book.setInclusionDate(LocalDate.now());
+        book.setInclusionDate(LocalDateTime.now());
         book.setDateOfTheConclusion(null);
         book.setEvaluationGrade(10);
         book.setStatus(BookStatusType.LIDO);
@@ -187,7 +188,7 @@ public class BookServiceTest {
         vo.setId(number);
         vo.setTitle("Mocked Title");
         vo.setAuthor("Mocked Author");
-        vo.setInclusionDate(LocalDate.now());
+        vo.setInclusionDate(LocalDateTime.now());
         vo.setDateOfTheConclusion(null);
         vo.setEvaluationGrade(10);
         vo.setStatus(new BookStatusVO(BookStatusType.LIDO.getDescription(), BookStatusType.LIDO));

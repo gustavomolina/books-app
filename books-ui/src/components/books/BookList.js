@@ -56,9 +56,9 @@ class BookList extends React.Component {
           </Link>
           <div className="author"><b>Autor:</b> {book.author}</div>
           <div className="status"><b>Status:</b> {book.status.label}</div>
-          <div className="inclusionDate"><b>Data em que foi adicionado:</b> {book.inclusionDate}</div>
-          {book.dateOfTheConclusion && <div className="dateOfTheConclusion"><b>Data em que foi concluído:</b> {book.dateOfTheConclusion}</div>}
-          {book.evaluationGrade && <div className="evaluationGrade"><b>Nota de avaliação:</b> {book.evaluationGrade}</div>}
+          {book.inclusionDate && book.inclusionDate != null && <div className="inclusionDate"><b>Data em que foi adicionado:</b> {book.inclusionDate.substring(0,10)}</div>}
+          {book.dateOfTheConclusion && book.dateOfTheConclusion != null && <div className="dateOfTheConclusion"><b>Data em que foi concluído:</b> {book.dateOfTheConclusion.substring(0,10)}</div>}
+          {book.evaluationGrade && book.evaluationGrade != null && <div className="evaluationGrade"><b>Nota de avaliação:</b> {book.evaluationGrade}</div>}
         </div>
       </div>
     );
