@@ -94,7 +94,7 @@ public class BooksResources {
     }
 
     private ResponseEntity<String> errorResponse(){
-        return new ResponseEntity<>("Something went wrong :(", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private ResponseEntity<String> noBookFoundResponse(Long id){

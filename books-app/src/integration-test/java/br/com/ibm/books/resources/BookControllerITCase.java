@@ -2,6 +2,7 @@ package br.com.ibm.books.resources;
 
 import br.com.ibm.books.entities.Book;
 import br.com.ibm.books.repository.BooksRepository;
+import br.com.ibm.books.vo.BookVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +35,6 @@ public class BookControllerITCase extends CommonITCase {
     @LocalServerPort
     private int port;
 
-
-
     @Autowired
     private BooksRepository booksRepository;
 
@@ -57,11 +56,11 @@ public class BookControllerITCase extends CommonITCase {
 
         //when
 
-        ResponseEntity<List<Book>> response = restTemplate.exchange(
+        ResponseEntity<List<BookVO>> response = restTemplate.exchange(
                 baseURL + "/api/books/",
                 HttpMethod.GET,
                 new HttpEntity<>(new HttpHeaders()),
-                new ParameterizedTypeReference<List<Book>>() {});
+                new ParameterizedTypeReference<List<BookVO>>() {});
 
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -110,14 +109,12 @@ public class BookControllerITCase extends CommonITCase {
         //then
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
-            // check response Book
         Book responseBook = response.getBody();
         assertNotNull(responseBook.getId());
         assertEquals(book.getTitle(), responseBook.getTitle());
         assertEquals(book.getAuthor(), responseBook.getAuthor());
         assertEquals(book.getEvaluationGrade(), responseBook.getEvaluationGrade());
 
-            // check saved Book in db
         Book savedBook = findBookInDbById(responseBook.getId()).get();
         assertEquals(responseBook.getId(), savedBook.getId());
         assertEquals(book.getTitle(), savedBook.getTitle());
@@ -145,14 +142,12 @@ public class BookControllerITCase extends CommonITCase {
         //then
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
-        // check response Book
         Book responseBook = response.getBody();
         assertNotNull(responseBook.getId());
         assertEquals(book.getTitle(), responseBook.getTitle());
         assertEquals(book.getAuthor(), responseBook.getAuthor());
         assertEquals(book.getEvaluationGrade(), responseBook.getEvaluationGrade());
 
-        // check saved Book in db
         Book savedBook = findBookInDbById(responseBook.getId()).get();
         assertEquals(responseBook.getId(), savedBook.getId());
         assertEquals(book.getTitle(), savedBook.getTitle());

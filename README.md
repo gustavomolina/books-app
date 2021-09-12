@@ -1,4 +1,4 @@
-## Aplicação FullStack para CRUD de livros
+## Aplicação para acompanhamento de livros
 
 Esta aplicação possui a seguinte stack:
 - Base de dados PostgreSQL
