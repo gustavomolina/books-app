@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  books-postgres:
+    image: "postgres:9.6-alpine"
+    container_name: books-postgres
+    volumes:
+      - books-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=books
+      - POSTGRES_USER=books
+      - POSTGRES_PASSWORD=books
+
+  books-app:
+    build: ./books-app
+    container_name: books-app
+    environment:
+      - DB_SERVER=books-postgres
+      - POSTGRES_DB=books
+      - POSTGRES_USER=books
+      - POSTGRES_PASSWORD=books
+    ports:
+      - 8080:8080
+    links:
+      - books-postgres
+
+  books-ui:
+    build:
+      context: ./books-ui
+      args:
+        - REACT_APP_HOST_IP_ADDRESS=http://localhost:8080
+    ports:
+      - "3000:80"
+
+
+volumes:
+  books-data:
