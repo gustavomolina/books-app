@@ -2,7 +2,7 @@
 
 Esta aplicação possui a seguinte stack:
 - Base de dados PostgreSQL
-- Backend em Java (Spring Boot)
+- Backend em Java (Spring)
 - Frontend em ReactJS
 
 Ao fim do processo descrito abaixo, esta aplicação ficará disponível no endereço: **http://localhost:3000/**
@@ -11,16 +11,16 @@ Ao fim do processo descrito abaixo, esta aplicação ficará disponível no ende
 
 ### Pré-requisitos
 
-Para rodar esta aplicação você deve ter em sua máquina instalados: **Docker** e **Docker Compose**.
+Para rodar este projeto você deve ter em sua máquina instalados: **Docker** e **Docker Compose**.
 
 Instruções para instalar o **Docker** em [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [Windows](https://docs.docker.com/docker-for-windows/install/), [Mac](https://docs.docker.com/docker-for-mac/install/).
 
 **Docker Compose** Para Ubuntu seguir [essas instruções](https://docs.docker.com/compose/install/).
 
 
-### Como rodar a aplicação?
+### Como rodar o projeto?
 
-A aplicação pode ser rodada pelos seguintes comandos:
+O projeto pode ser rodado pelos seguintes comandos:
 
 ```
 $ docker-compose build
@@ -32,7 +32,7 @@ Em seguida:
 $ docker-compose up -d
 ```
 
-Se você quiser parar a aplicação, use o seguinte comando:
+Se você quiser parar os docker's containers do projeto, use o seguinte comando:
 
 ```
 $ docker-compose down
@@ -42,9 +42,9 @@ $ docker-compose down
 
 #### books-database (Base de dados)
 
-A base de dados PostgreSQL possui um unico schema com uma unica tabela - book
+A base de dados PostgreSQL possui um único schema com uma única tabela - book
 
-Apos rodar a aplicação a base de dados pode ser acessada com as credenciais:
+Apos rodar o projeto, a base de dados pode ser acessada com as credenciais:
 
 - Host: *localhost:5432*
 - Database: *books*
@@ -55,8 +55,8 @@ Apos rodar a aplicação a base de dados pode ser acessada com as credenciais:
 
 #### books-app (REST API)
 
-É uma aplicação em Spring Boot (Java) que sse conecta com a base de dados e expoe os
-endpoints REST para serem consumidos pelo frontend. Este suporta os métodos HTTP
+É uma API desenvolvida com a stack Spring (Java) que se conecta com a base de dados e expõe os
+endpoints REST para serem consumidos pelo frontend segundo os requisitos funcionais. Portanto, suporta os métodos HTTP
 GET, POST, PUT e DELETE.
 
 A lista completa de endpoints pode ser consultada via Swagger pelo link
@@ -66,7 +66,7 @@ A lista completa de endpoints pode ser consultada via Swagger pelo link
 
 #### books-ui (Frontend)
 
-Desenvolvida com ReactJS, consome os endpoints providos pela *books-app*.
+Aplicação Web desenvolvida com ReactJS, consome os endpoints providos pela *books-app*.
 
-Pode ser acessado por meio do link **http://localhost:3000/**
+Pode ser acessada por meio do link **http://localhost:3000/**
 
